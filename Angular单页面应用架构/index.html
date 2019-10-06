@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- layout.ejs-->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="逃出自己的舒适圈">
+    <meta name="author" content="小小Z">
+    <meta name="keyword" content="angular, 前端, es6, css3, 可视化, javascript">
+    <link rel="canonical" href="http://yoursite.com/Angular单页面应用架构/">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Zhl&#39;s blog &lt;a class=&#34;github-button&#34; href=&#34;https://github.com/zhaoleiwhut&#34; aria-label=&#34;Follow @zhaoleiwhut on GitHub&#34;&gt;Follow @zhaoleiwhut&lt;/a&gt;" href="/atom.xml">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>
+        
+        Angular单页面应用架构｜Zhl&#39;s blog
+        
+    </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+      <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+      <link rel="stylesheet" href="/css/highlight.css">
+    
+
+    
+
+    
+      <meta name="google-site-verification" content="wtCjI-zcpr2FYwWS3sI4OWzMK9e7VomDrZyxpVUUIng">
+    
+
+    
+
+    
+
+    <!-- user customization -->
+    <link rel="stylesheet" href="/css/arsnippet.css">
+</head>
+
+<style>
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<header>
+  <nav class="navbar navbar-default header-navbar" id="nav-top" data-ispost = "true" data-istags="false" data-ishome = "false" >
+    <div class="container-fluid">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" aria-expanded="false"  data-target="#website_navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand animated pulse">
+          <a class="brand-logo" href="/">
+            Zhl's blog <a class="github-button" href="https://github.com/zhaoleiwhut" aria-label="Follow @zhaoleiwhut on GitHub">Follow @zhaoleiwhut</a>
+          </a>
+        </span>
+      </div>
+
+      <div class="collapse navbar-collapse" id="website_navbar">
+          <ul class="nav navbar-nav navbar-right">
+              
+                <li>
+                  <a href="/">home</a>
+                </li>
+              
+                <li>
+                  <a href="/angular-category/">angular</a>
+                </li>
+              
+                <li>
+                  <a href="/archives/">archives</a>
+                </li>
+              
+                <li>
+                  <a href="/tags/">tags</a>
+                </li>
+              
+                <li>
+                  <a href="/about-me/">about me</a>
+                </li>
+              
+                <li>
+                  <a href="/atom.xml">RSS</a>
+                </li>
+              
+          </ul>
+      </div>
+  </nav>
+
+
+  
+    <style>
+       .intro-header {
+          background-image: url('/img/sky-clouds-moon-horizon.jpg?h=350&amp;auto=compress&amp;cs=tinysrgb');
+      }
+    </style>
+
+    <div class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                    <div class="site-heading">
+                        <h1>Angular单页面应用架构</h1>
+                        
+                        
+                          <span class="meta">
+                               <span class="meta-item">博主: 小小Z</span>
+                               <span class="meta-item">创建于: Jun 1, 2016</span>
+                               
+                                 <span class="meta-item">更新于: Oct 5, 2019</span>
+                               
+                          </span>
+                          <div class="tags text-center">
+                              分类: 
+                              <a class="tag" href="/categories/#framework"
+                                 title="framework">framework</a>
+                              
+                              <a class="tag" href="/categories/#angular"
+                                 title="angular">angular</a>
+                              
+                              <a class="tag" href="/categories/#language"
+                                 title="language">language</a>
+                              
+                              <a class="tag" href="/categories/#javascript"
+                                 title="javascript">javascript</a>
+                              
+                              <a class="tag" href="/categories/#test"
+                                 title="test">test</a>
+                              
+                          </div>
+                          <div class="tags text-center">
+                              标签: 
+                              <a class="tag" href="/tags/#angular.js"
+                                 title="angular.js">angular.js</a>
+                              
+                              <a class="tag" href="/tags/#test"
+                                 title="test">test</a>
+                              
+                          </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</header>
+
+
+<!-- Main Content -->
+<!-- post.ejs -->
+<article>
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-1 col-sm-9">
+          
+            <div class="text-center"><div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5272bc2a7b3c1ddc" async = "async" ></script>
+</div>
+</div><hr>
+          
+          <div class="subscribe"><a href="https://github.com/zhaoleiwhut" target="_blank">Go to Github Home Page</a></div>
+          <p>如今Angular正处于十分尴尬的境地，因为要不了很久它也会被更加优秀和新奇的框架取代，但是angular的架构思路仍然具备重要的借鉴价值。</p>
+<p>得益于angular非常完整的生态，各团队都能较为容易地开发出用户体验良好的web app。</p>
+<p>但是，只有真正把一个应用越做越大，越做越复杂的时候，我们才能体会到一个软件架构的重要性，也才更能感受到架构的局限性带来的窘境。</p>
+<p>angular的性能缺陷是先天性的，但应用规模很小的时候，这的确不值一提，因为显然，还有很多angular之外的优化点更值得关注。但人类的天性，总是会把事情越搞越大、越做越复杂。因此性能瓶颈的到来只是时间问题。</p>
+<p>我期待今 Angular 2.0正式版推出的时候，我们希望能够小范围跟进，明 全方面铺展开，顺便的，也能更多地采用ES6的新特性。</p>
+<p>在前端开发领域，有时候，哪种技术栈更优秀取决于哪个牛逼吹得更响，不信你找一群前端开发来问问他们angular和react哪个好。</p>
+<p>##文件组织结构<br>绝大多数观点都是建议，将angular的代码文件按照业务模块进行组织，因为开发和维护某一个功能的时候，尽可能快地定位相关文件，是很能显著提高开发效率的，如果相关业务文件分散在不同文件夹，将会显得凌乱。并且，个人认为，前端开发工具的未来一定是向着IDE的趋势发展的（个人观点）。前端对编译器（翻译器）和调试器的需求正越来越强，尤其是前者。暂且忽略主要浏览器（Firefox 、Chrome、Edge）已支持WebAssembly技术的现实，typescript逐渐大众化，前端必须要懂翻译器。并且angular的开发语言也是typescript。<br><img src="https://static.oschina.net/uploads/img/201606/01000245_RNAR.png" alt="Angular App代码组织结构" title="Angular App代码组织结构"></p>
+<p>##路由系统<br>路由系统非常重要，在现代web应用开发中，没有路由系统，所谓单页面应用无从谈起。</p>
+<p>angular自带的路由模块（ngRoute模块）不支持嵌套路由，提供的接口不够丰富。比较受推崇的是第三方的ui.router模块。当我们构建一个单页面应用，我们首先需要分析那一部分是需要动态切换的，哪一部分是一直固定不变的，然后针对动态切换的那一部分设计路由。当然，我们还可以继续给动态切换的各个页面继续细分，并设计二级路由。</p>
+<p>出于性能的考虑，angular中的控制器是只有当需要的时候才会创建，页面切换的时候，新页面的控制器会被创建，旧页面的控制器会被销毁，同时会触发响应的$destroy事件。</p>
+<p>在app中需要添加对路由模块的依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>, [<span class="string">'ui.router'</span>]);</span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">然后在各个模块的控制器文件中（比如 module1.controller.js）定义路由：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>JavaScript</span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    .config([<span class="string">'$stateProvider'</span>, <span class="string">'$urlRouterProvider'</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">$stateProvider, $urlRouterProvider</span>) </span>&#123;</span><br><span class="line">            $stateProvider</span><br><span class="line">                .state(<span class="string">"module1"</span>, &#123;</span><br><span class="line">                    url: <span class="string">"/module1"</span>,</span><br><span class="line">                    templateUrl: <span class="string">'/app/module1/index.html'</span>,</span><br><span class="line">                    controller: <span class="string">'module1Controller'</span></span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    ])</span><br><span class="line">    .controller(<span class="string">'module1Controller'</span>, [<span class="string">'$rootScope'</span>, <span class="string">'$scope'</span>, <span class="string">'$log'</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $scope, $log</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    ]);</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以将所有路由定义在一个单独的代码文件中，这取决于不同团队的代码组织习惯。<br>当还需要设置app的默认路由，即当没有任何匹配的路由的时候，默认跳转的路径地址：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    .config([<span class="string">'$stateProvider'</span>, <span class="string">'$urlRouterProvider'</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">$stateProvider, $urlRouterProvider</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 无任何匹配的时候，默认跳转到module1</span></span><br><span class="line">            $urlRouterProvider.otherwise(<span class="string">'/module1'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    ]);</span><br></pre></td></tr></table></figure></p>
+<p>每一个app在最初创建的时候，应该分析该app可以划分为多少个模块，然后针对每个模块定义文件夹和路由名称，并且将代码文件（html模板文件、控制器、过滤器、服务、指令）名称都按照统一的风格命名好，将每一个控制器和一部分通用的服务、指令和过滤器定义好，然后其它开发人员再进行“填”代码的工作，这样比较容易能保证代码的良好结构和统一的风格。也能有效减少重复代码。<br>app设计初期的顶层设计工作至关重要，随着app规模不断扩大，其作用愈加明显。</p>
+<p>##控制器<br>控制器本质上是为了实现局部作用域，一个函数（控制器）负责一个html模板的业务逻辑，控制器只在需要“激活”的时候才实例化，一方面减少了变量命名冲突，同时提升了性能和减少了资源占用（路由切换的时候旧的控制器会被销毁）。</p>
+<p>##指令<br>指令本质上是angular对web组件的实现方式，复杂的angular单页面应用，几乎都是由众多的自定义指令（嵌套）组成。自定义指令，也是自定义html标签。<br>例如我们可以主页面划分为三部分:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">layout-header</span>&gt;</span><span class="tag">&lt;/<span class="name">layout-header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">layout-footer</span>&gt;</span><span class="tag">&lt;/<span class="name">layout-footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>uiView指令所定义的dom元素为路由所定义的子模块的插入点。子模块仍然可以细分为多个子模块，各子模块可以通过指令将业务代码及html模板分开，这样可以有效将任务分离及形成更好的代码组织方式。使用ng-if控制子模块的编译状态，提高性能。指令内可以嵌套定义。</p>
+<p>为了提高代码的可维护性，通常建议将dom的操作均封装在指令内，而控制器内不进行dom操作。</p>
+<p>##服务，常量<br>Angular提供多种注册服务的方法，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">接口</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">provider</td>
+<td style="text-align:center">注册一个服务，该服务的特殊之处是，它可用config函数进行配置</td>
+</tr>
+<tr>
+<td style="text-align:center">constant</td>
+<td style="text-align:center">注册一个只读的变量</td>
+</tr>
+<tr>
+<td style="text-align:center">value</td>
+<td style="text-align:center">注册一个变量，可读写</td>
+</tr>
+<tr>
+<td style="text-align:center">factory</td>
+<td style="text-align:center">注册一个服务</td>
+</tr>
+<tr>
+<td style="text-align:center">service</td>
+<td style="text-align:center">注册一个服务</td>
+</tr>
+</tbody>
+</table>
+<p>Angular的所有服务为单例模式，通过注入的方式提供给各个控制器、服务、以及过滤器使用。</p>
+<p>为了使我们的app架构更加科学和提高可维护，我们在每一个业务模块下的文件夹中，建立XX.sevice.js，里面包含该模块所需的各种服务。<br>由于angular的所有模块本质上是全局的，因此显然这些服务也可被其它模块使用，但是为了使我们的代码更加合理，我们应该将通用性强的服务写到一个公共的文件夹中。</p>
+<p>每一个app中都会存在大量常量，我们可以使用constant方法非常方便地创建常量，并且自动地注入到所有需要的地方：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    .constant(<span class="string">'module1Contant'</span>, &#123;</span><br><span class="line">        week: &#123;</span><br><span class="line">            <span class="string">'0'</span>: <span class="string">'星期一'</span>,</span><br><span class="line">            <span class="string">'1'</span>: <span class="string">'星期二'</span>,</span><br><span class="line">            <span class="string">'2'</span>: <span class="string">'星期三'</span>,</span><br><span class="line">            <span class="string">'3'</span>: <span class="string">'星期四'</span>,</span><br><span class="line">            <span class="string">'4'</span>: <span class="string">'星期五'</span>,</span><br><span class="line">            <span class="string">'5'</span>: <span class="string">'星期六'</span>,</span><br><span class="line">            <span class="string">'6'</span>: <span class="string">'星期日'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        other: &#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码是将一周的七天映射为0-6的字符。<br>针对常量的数据结构，通常设计为字典的形式，比数组的方式更佳。尤其是用于过滤器的时候。</p>
+<p>##过滤器<br>过滤器用于控制变量的展示。业务数据应当尽可能保留其原始的形态，当显示在界面的时候，通过控制器对齐进行转换，以对用户更友好，并且不修改原始值。<br>如下过滤器可以将0-6的数字转换成一个星期的每一天。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    <span class="comment">//将 0-6 转换成星期一、星期二……</span></span><br><span class="line">    .filter(<span class="string">'week'</span>, [<span class="string">'module1Contant'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">module1Contant</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> module1Contant.week[input];</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>##异常处理<br>angular各模块的异常均通过$exceptionHandler服务进行处理，系统应该重写该服务，以实现自己的异常处理逻辑。<br>JavaScript由于是单线程，在app的构建过程中，局部出现的异常可能会导致整个app奔溃，重写该服务的好处是，整个app不会因为某一个controller、service、filter、directive出现异常而崩溃。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    .factory(<span class="string">'$exceptionHandler'</span>, [<span class="string">'$log'</span>, <span class="string">'handles'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$log, handles</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">exception, cause</span>) </span>&#123;</span><br><span class="line">            $log.error(exception);</span><br><span class="line">            <span class="comment">//处理异常</span></span><br><span class="line">            handles.handleException(exception);</span><br><span class="line">            <span class="comment">//注意这里不再抛出异常</span></span><br><span class="line">            <span class="comment">//throw exception;        </span></span><br><span class="line">        &#125;;    </span><br><span class="line">    &#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>值得注意的是$exceptionHandler服务内部产生的异常会被自身处理。</p>
+<p>##表单校验<br>Angular提供了ngMessages用于增强表单校验，用户需自定义校验函数扩充该模块。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular-messages.min.js"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'MyApp'</span>, [<span class="string">'ngMessages'</span>]);</span><br></pre></td></tr></table></figure>
+<p>通过指令的方式扩充表单校验模块，此处我们定义指令 appValidator：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>)</span><br><span class="line">    .directive(<span class="string">'appValidator'</span>, [<span class="string">'$log'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$log</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            restrict: <span class="string">'A'</span>,</span><br><span class="line">            <span class="built_in">require</span>: <span class="string">'ngModel'</span>,</span><br><span class="line">            link: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, elem, attrs, ctrl</span>) </span>&#123;</span><br><span class="line">                <span class="comment">//校验ip地址</span></span><br><span class="line">                <span class="keyword">var</span> isIp = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> re = <span class="regexp">/^(\d&#123;1,2&#125;|1\d\d|2[0-4]\d|25[0-5]|\*)\.(\d&#123;1,2&#125;|1\d\d|2[0-4]\d|25[0-5]|\*)\.(\d&#123;1,2&#125;|1\d\d|2[0-4]\d|25[0-5]|\*)\.(\d&#123;1,2&#125;|1\d\d|2[0-4]\d|25[0-5]|\*)$/</span>;</span><br><span class="line">                    <span class="keyword">return</span> re.test(str);</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="keyword">if</span> (attrs.hasOwnProperty(<span class="string">'isIp'</span>)) &#123;</span><br><span class="line">                    ctrl.$validators.isIp = <span class="function"><span class="keyword">function</span>(<span class="params">modelValue, viewValue</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> viewValue ? isIp(viewValue) : <span class="literal">true</span>;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>目前已为该指令添加了校验表单输入参数是否为ip地址的校验逻辑。<br>此时，只要在表单中添加appValidator指令，并且添加isIp属性，即可实现对该表单的输入是否是ip地址的校验。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"formName"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">app-validator</span> <span class="attr">is-ip</span> <span class="attr">name</span>=<span class="string">"ip"</span> <span class="attr">ng-model</span>=<span class="string">"params.ip"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-messages</span>=<span class="string">"formName.ip.$error"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-messages-include</span>=<span class="string">"messagesTemplate"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当用户在表单中输入字符时，会即时对输入值进行校验。<br>可以看到，在表单中使用了ngMessages和ngMessagesInclude指令，该指令的组合用于显示校验的提示文本，其中ngMessagesInclude的值为html模板，可以在app的run函数中进行定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line">angular.module(<span class="string">'myApp'</span>, [<span class="string">'ngMessages'</span>])</span><br><span class="line">    .run([<span class="string">'$templateCache'</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">$templateCache</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//设置表单报错的模板</span></span><br><span class="line">            <span class="keyword">var</span> messagesTemplate = [</span><br><span class="line">                <span class="string">'&lt;div&gt;'</span>,</span><br><span class="line">                <span class="string">'&lt;div ng-message="required"&gt;不能为空&lt;/div&gt;'</span>,</span><br><span class="line">                <span class="string">'&lt;div ng-message="minlength"&gt;参数太短&lt;/div&gt;'</span>,</span><br><span class="line">                <span class="string">'&lt;div ng-message="isIp"&gt;不是合法的IPV4地址&lt;/div&gt;'</span>,</span><br><span class="line">                <span class="string">'&lt;/div&gt;'</span></span><br><span class="line">            ].join(<span class="string">''</span>);</span><br><span class="line">            $templateCache.put(<span class="string">"messagesTemplate"</span>, messagesTemplate);</span><br><span class="line">        &#125;</span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+<p>可以看到模板中定义了各种校验状态下对应的提示文本。对表单的所有校验结果均会存储在formName.ip.$error变量中，ngMessage指令对应的属性值会作为key从formName.ip.$error中取值，如果值为true，则显示相应的提示文本。如果出现多个校验均不通过，则优先显示靠前的提示文本。<br>也可以通过后台进行异步的数据校验，校验函数的定义方式大致如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ctrl.$asyncValidators.uniqueUsername = <span class="function"><span class="keyword">function</span>(<span class="params">modelValue, viewValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value = modelValue || viewValue;</span><br><span class="line">    <span class="keyword">return</span> $http.get(<span class="string">'/api/users/'</span> + value).</span><br><span class="line">    then(<span class="function"><span class="keyword">function</span> <span class="title">resolved</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (res.data) &#123;</span><br><span class="line">            <span class="comment">//用户名已经存在,验证失败,给下一个promise传递失败通知.</span></span><br><span class="line">            <span class="keyword">return</span> $q.reject(<span class="string">'res.data'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//用户名不存在,验证成功.</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="function"><span class="keyword">function</span> <span class="title">rejected</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>##绑定html</p>
+<p>##动画机制<br>Angular提供了优雅的元素动画解决方案，需要与CSS3的animation属性配合使用。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular-animate.min.js"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>, [<span class="string">'ngAnimate'</span>]);</span><br></pre></td></tr></table></figure>
+<p>添加了模块以后，angular会在dom操作的时候为dom添加特定的状态类。<br>支持如下指令：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Directive</th>
+<th style="text-align:left">Supported Animations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ngRepeat</td>
+<td style="text-align:left">enter, leave and move</td>
+</tr>
+<tr>
+<td style="text-align:center">ngView</td>
+<td style="text-align:left">enter and leave</td>
+</tr>
+<tr>
+<td style="text-align:center">ngInclude</td>
+<td style="text-align:left">enter and leave</td>
+</tr>
+<tr>
+<td style="text-align:center">ngSwitch</td>
+<td style="text-align:left">enter and leave</td>
+</tr>
+<tr>
+<td style="text-align:center">ngIf</td>
+<td style="text-align:left">enter and leave</td>
+</tr>
+<tr>
+<td style="text-align:center">ngClass</td>
+<td style="text-align:left">add and remove (the CSS class(es) present)</td>
+</tr>
+<tr>
+<td style="text-align:center">ngShow &amp; ngHide</td>
+<td style="text-align:left">add and remove (the ng-hide class value)</td>
+</tr>
+<tr>
+<td style="text-align:center">form &amp; ngModel</td>
+<td style="text-align:left">add and remove (dirty, pristine, valid, invalid &amp; all other validations)</td>
+</tr>
+<tr>
+<td style="text-align:center">ngMessages</td>
+<td style="text-align:left">add and remove (ng-active &amp; ng-inactive)</td>
+</tr>
+<tr>
+<td style="text-align:center">ngMessage</td>
+<td style="text-align:left">enter and leave</td>
+</tr>
+</tbody>
+</table>
+<p>比如如下dom：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-if</span>=<span class="string">"state"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当state的值由false变为true的时候，angular会自动为该元素添加.ng-enter类。<br>我们只要为该类定义一个动画样式即可，如下为一个从右滑动到原始位置的并出现回弹效果的动画定义：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> bounceInRight &#123;</span><br><span class="line">    0%,</span><br><span class="line">    100%,</span><br><span class="line">    60%,</span><br><span class="line">    75%,</span><br><span class="line">    90% &#123;</span><br><span class="line">        <span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.215, .61, .355, 1)</span><br><span class="line">    &#125;</span><br><span class="line">    0% &#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(3000px, 0, 0)</span><br><span class="line">    &#125;</span><br><span class="line">    60% &#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(-25px, 0, 0)</span><br><span class="line">    &#125;</span><br><span class="line">    75% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(10px, 0, 0)</span><br><span class="line">    &#125;</span><br><span class="line">    90% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(-5px, 0, 0)</span><br><span class="line">    &#125;</span><br><span class="line">    100% &#123;</span><br><span class="line">        <span class="attribute">transform</span>: none</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.ng-enter</span> &#123;</span><br><span class="line">    <span class="attribute">animation-name</span>: bounceInRight;</span><br><span class="line">    <span class="attribute">animation-duration</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##性能优化</p>
+<p>###JavaScript本身的性能<br>JavaScript的执行性能只能依赖浏览器针对JavaScript进行优化以及WebAssembly标准的落实。<br>由于JavaScript的单线程机制，如果页面内存在大量的密集计算，会导致界面的交互的卡顿或停止，应该应用HTML5提供的javascript多线程解决方案Web Workers来解决。<br>Web Workers的线程内不能操作Dom。<br>Dom元素结构本身比较复杂，操作dom是比较缓慢且耗时的，针对这个问题，能做的优化就是尽量减少dom操作的频率。</p>
+<p>###Angular性能优化<br>针对 angular本身的性能优化主要集中在如下几点：<br>1) 优化$digest 循环<br>2) 优化ng-repeat<br>3) 优化过滤器和表达式<br>4) 渲染优化<br>5) 优化$watch表达式<br>6) 加载优化</p>
+<p>一个核心概念与性能密切相关：更新周期（Digest Cycle）。<br>每一个域都会存放一个由方法组成的数组 $$watchers。<br>AngularJS并不直接调用$digest()，而是调用$scope.$apply()，后者会调用$rootScope.$digest()。因此，一轮$digest循环从根域$rootScope开始，随后会遍历所有的子域（children scope）中的watchers。</p>
+<p><img src="https://static.oschina.net/uploads/img/201606/01004719_W8Ay.png" alt="输入图片说明" title="在这里输入图片标题"><br>每在页面绑定一个模型，则watcher数就会+1，一个很简单的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$scope.data = <span class="string">'hello world'</span>;</span><br><span class="line"><span class="comment">//就算把下面这个对象注释掉，页面仍然有三个watcher</span></span><br><span class="line">$scope.obj = &#123;</span><br><span class="line">    name: <span class="string">'Li Lei'</span>,</span><br><span class="line">    age: <span class="string">'25 years old'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">     &#123;&#123;data&#125;&#125; &#123;&#123;obj.name&#125;&#125; &#123;&#123;obj.age&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://static.oschina.net/uploads/img/201606/01004653_cBOu.png" alt="输入图片说明" title="在这里输入图片标题"></p>
+<p>触发$digest的两种方式：</p>
+<ol>
+<li>自动触发，比如ng-click、ng-model、$timeout 等等</li>
+<li>手动触发，$scope.$apply()</li>
+</ol>
+<p>关于 $digest需要注意以下几点：<br>1) $digest循环最少会运行2次<br>2) $digest循环会持续运行直到model不再发生变化<br>3) $digest循环默认最多运行10次<br>如何减少watcher数量？<br>解绑$watch对象，你可以用$watch的返回函数解绑</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unbinder = scope.$watch(<span class="string">'scopeValueToBeWatcher'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">&#125;);</span><br><span class="line">unbinder(); <span class="comment">//这一行将watcher从 $$watchers 中移除。</span></span><br></pre></td></tr></table></figure>
+<p>优化$digest 调用，可以直接调用$scope.$digest()；</p>
+<p>当 ng-repeat 的数组被替换时, 它默认并不会重新利用已有的 Dom 元素，而是直接将其全部删除并重新生成新的数组 Dom 元素。可使用 “track by” 减少dom的操作。<br>例如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng-repeat="x in list track by $index"</span><br></pre></td></tr></table></figure></p>
+<p>####优化过滤器和表达式<br>最佳实践：<br>位于视图中的每个过滤器将至少被调用1次，表达式会被执行至少三次，表达式应尽量简单<br>①    使用过滤器或者过滤服务；<br>②    尽量不要使用内联方法处理数据；</p>
+<p>使用过滤器：<br>使用过滤器： { {number1 | toUpperCase } } 优于<br>使用函数：{ { toUpperCase ( number1 ) } }</p>
+<p>####渲染优化</p>
+<ol>
+<li>ng-hide 和 ng-show 简单地对CSS display属性进行切换。dom还存在于域中， 所有的$$watchers还是会被触发；</li>
+<li>ng-if 和 ng-switch 实际上将DOM中完全移除，相应的域也会被移除。</li>
+<li>适当使用 ng-if 和 ng-switch 代替 ng-hide/ng-show</li>
+</ol>
+<p>####优化$watch表达式<br>$scope.$watch(watchExpression, Callback, objectEquality);<br><em>watchExpression每次$digest都会执行两次：应尽量简单；
+</em>objectEquality应尽可能设置为false，以避免深度比较；</p>
+<p>####加载优化<br>使用Ajax加载模板会导致Web应用缓慢或者有卡顿<br>使用$templateCache缓存服务，优点：减少http请求次数，加快响应。<br>有两种方式显式启用缓存，在控制器中，可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$templateCache.put(<span class="string">'template.html'</span>,<span class="string">''</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在html页面中可以这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/ng-template'</span> <span class="attr">id</span>=<span class="string">'template.html'</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>Hi there<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>###开发者需要注意的其它问题</p>
+<p><img src="https://static.oschina.net/uploads/img/201606/01003820_486M.png" alt="输入图片说明" title="在这里输入图片标题"></p>
+
+          
+            <a href="/about-me/" class="center-block" style="width:100px;" target="_blank"><img class="img-circle" style="width:100px;height:100px;margin:20px 0;" src="/img/avatar.jpg" title="About Me" alt="About Me"></a>
+          
+          <hr>
+          <ul class="pager">
+              
+              <li class="previous">
+                  <a href="/如何使用Hexo搭建博客/" class="hint--left hint--rounded"
+                     aria-label="如何使用Hexo搭建博客">&larr; 上一篇</a>
+              </li>
+              
+              
+              <li class="next">
+                  <a href="/Sublime-text配置前端代码（JavaScript-Html-CSS）校验工具/" class="hint--right hint--rounded"
+                     aria-label="Sublime text配置前端代码（JavaScript/Html/CSS）校验工具">下一篇&rarr;</a>
+              </li>
+              
+          </ul>
+        
+  <br>
+  
+
+  
+  <!-- livere begin-->
+  <div id="lv-container" data-id="city" data-uid="MTAyMC8zODA0OS8xNDU3OQ==">
+      <script type="text/javascript">
+          (function(d, s) {
+              var j, e = d.getElementsByTagName(s)[0];
+
+              if (typeof LivereTower === 'function') { return; }
+
+              j = d.createElement(s);
+              j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+              j.async = true;
+
+              e.parentNode.insertBefore(j, e);
+          })(document, 'script');
+      </script>
+      <noscript> To show LiveRe comment, please use JavaScript</noscript>
+  </div>
+  <!-- livere end -->
+  
+  </div>
+
+
+        
+  <div class="hidden-xs col-sm-3 toc-col">
+    <div class="toc-wrap">
+        目录
+        
+          
+        
+    </div>
+  </div>
+
+
+      </div>
+  </div>
+</article>
+
+<!-- Footer -->
+<!-- footer.ejs -->
+<footer>
+    <div class="text-center">
+      <ul class="list-inline">
+          
+              <li>
+                  <a href="/atom.xml" target="_blank">
+                      <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                      </span>
+                  </a>
+              </li>
+          
+          
+              <li>
+                  <a target="_blank" href="https://twitter.com/yingjieYJH">
+                      <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                      </span>
+                  </a>
+              </li>
+          
+          
+
+          
+
+          
+
+          
+              <li>
+                  <a target="_blank"  href="https://github.com/huyingjie">
+                      <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                      </span>
+                  </a>
+              </li>
+          
+
+          
+
+          
+
+      </ul>
+     <div class="text-muted copyright">
+            &copy;
+            
+            2015 - 2019
+            
+            
+              <i class="fa fa-heart"></i>
+            
+            小小Z
+        <br>
+          
+              由 <a target="_blank" href="https://hexo.io">Hexo</a> 强力驱动
+          
+          
+            |
+          
+          
+              主题 - <a href="https://github.com/huyingjie/hexo-theme-A-RSnippet" target="_blank">A-RSnippet</a> v0.1.0
+          
+          
+      </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-38355881-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+<script>console.log('baidu');
+    var _baId = '3eeaa01427c47e72490394b4b8efb1aa';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- user customization -->
+<script src="/js/arsnippet.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+</body>
+
+</html>
