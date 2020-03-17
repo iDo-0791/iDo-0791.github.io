@@ -11,7 +11,7 @@
     <meta name="keyword" content="angular, 前端, es6, css3, 可视化, javascript">
     <link rel="canonical" href="http://yoursite.com/sql按任意时间段分组统计/">
     <link rel="shortcut icon" href="/img/favicon.png">
-    <link rel="alternate" type="application/atom+xml" title="Zhl&#39;s blog &lt;a class=&#34;github-button&#34; href=&#34;https://github.com/zhaoleiwhut&#34; aria-label=&#34;Follow @zhaoleiwhut on GitHub&#34;&gt;Follow @zhaoleiwhut&lt;/a&gt;" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="iDo-0791 &lt;a class=&#34;github-button&#34; href=&#34;https://github.com/iDo-0791&#34; aria-label=&#34;Follow @iDo-0791 on GitHub&#34;&gt;Follow @iDo-0791&lt;/a&gt;" href="/atom.xml">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>
@@ -62,7 +62,7 @@
         </button>
         <span class="navbar-brand animated pulse">
           <a class="brand-logo" href="/">
-            Zhl's blog <a class="github-button" href="https://github.com/zhaoleiwhut" aria-label="Follow @zhaoleiwhut on GitHub">Follow @zhaoleiwhut</a>
+            iDo-0791 <a class="github-button" href="https://github.com/iDo-0791" aria-label="Follow @iDo-0791 on GitHub">Follow @iDo-0791</a>
           </a>
         </span>
       </div>
@@ -169,7 +169,7 @@
 </div>
 </div><hr>
           
-          <div class="subscribe"><a href="https://github.com/zhaoleiwhut" target="_blank">Go to Github Home Page</a></div>
+          <div class="subscribe"><a href="https://github.com/iDo-0791" target="_blank">Go to Github Home Page</a></div>
           <p>任意时间序列数据都可以按时间分组。<br>timestamp 为时间戳。</p>
 <p><strong>按每五分钟统计日志的数目</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="keyword">floor</span>(<span class="keyword">cast</span>(logs.timestamp <span class="keyword">as</span> <span class="built_in">int</span>) / <span class="number">60</span> / <span class="number">5</span>) <span class="keyword">as</span> dt,</span><br><span class="line">  <span class="keyword">count</span>(logs.id)</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">       <span class="keyword">select</span></span><br><span class="line">         logs.id,</span><br><span class="line">         logs.timestamp</span><br><span class="line">       <span class="keyword">from</span> public.logs <span class="keyword">as</span> <span class="keyword">logs</span></span><br><span class="line">       <span class="keyword">order</span> <span class="keyword">by</span> logs.id <span class="keyword">asc</span></span><br><span class="line">       <span class="keyword">limit</span> <span class="number">10</span>) <span class="keyword">as</span> <span class="keyword">logs</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">floor</span>(<span class="keyword">cast</span>(logs.timestamp <span class="keyword">as</span> <span class="built_in">int</span>) / <span class="number">60</span> / <span class="number">5</span>);</span><br></pre></td></tr></table></figure></p>
 

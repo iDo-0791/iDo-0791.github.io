@@ -11,7 +11,7 @@
     <meta name="keyword" content="angular, 前端, es6, css3, 可视化, javascript">
     <link rel="canonical" href="http://yoursite.com/useState带来的性能问题/">
     <link rel="shortcut icon" href="/img/favicon.png">
-    <link rel="alternate" type="application/atom+xml" title="Zhl&#39;s blog &lt;a class=&#34;github-button&#34; href=&#34;https://github.com/zhaoleiwhut&#34; aria-label=&#34;Follow @zhaoleiwhut on GitHub&#34;&gt;Follow @zhaoleiwhut&lt;/a&gt;" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="iDo-0791 &lt;a class=&#34;github-button&#34; href=&#34;https://github.com/iDo-0791&#34; aria-label=&#34;Follow @iDo-0791 on GitHub&#34;&gt;Follow @iDo-0791&lt;/a&gt;" href="/atom.xml">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>
@@ -62,7 +62,7 @@
         </button>
         <span class="navbar-brand animated pulse">
           <a class="brand-logo" href="/">
-            Zhl's blog <a class="github-button" href="https://github.com/zhaoleiwhut" aria-label="Follow @zhaoleiwhut on GitHub">Follow @zhaoleiwhut</a>
+            iDo-0791 <a class="github-button" href="https://github.com/iDo-0791" aria-label="Follow @iDo-0791 on GitHub">Follow @iDo-0791</a>
           </a>
         </span>
       </div>
@@ -157,7 +157,7 @@
 </div>
 </div><hr>
           
-          <div class="subscribe"><a href="https://github.com/zhaoleiwhut" target="_blank">Go to Github Home Page</a></div>
+          <div class="subscribe"><a href="https://github.com/iDo-0791" target="_blank">Go to Github Home Page</a></div>
           <p>在使用 useState hooks 的过程中，会 useState 的“赋值”函数多次调用会导致重复render，这个问题会带来性能问题。</p>
 <h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> React, &#123; useState, use &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [str1, setStr1] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [str2, setStr2] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(str1, str2); <span class="comment">// 这里会执行 3 次</span></span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setStr1(<span class="number">1</span>);</span><br><span class="line">    setStr2(<span class="number">1</span>);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div&gt;&#123;str1&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div&gt;&#123;str2&#125;&lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>上述代码的问题是，连续调用 setStr1() 和 setStr2() 会导致组件渲染两次，这里与 class 组件的 setState() 是不一样的，因为 setState() 会对状态进行合并，连续多次调用 setState() 仅会触发一次 render 。</p>
